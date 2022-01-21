@@ -70,9 +70,9 @@
     <thead>
         <tr>
             <th scope="col">Nama Member</th>
-            <th scope="col">Jenis</th>
+            <!-- <th scope="col">Jenis</th> -->
             <th scope="col">Proses Pengerjaan</th>
-            <th scope="col">Harga</th>
+            <!-- <th scope="col">Harga</th> -->
             <th scope="col">Hapus</th>
         </tr>
   </thead>
@@ -92,10 +92,10 @@
       ?>
         <tr>
             <td><?php echo $data_pemesanan["nama"]; ?></td>
-            <td><?php echo $data_pemesanan["jenis"]; ?></td>
-            <!-- <td><?php echo $data_pemesanan["qty"]; ?></td> -->
-            <td><?php echo $data_pemesanan["proses"]; ?></td>
-            <td><?php echo $data_pemesanan["harga"]; ?></td>
+            <!-- <td><?php echo $data_pemesanan["jenis"]; ?></td>
+            <td><?php echo $data_pemesanan["qty"]; ?></td> -->
+            <td><?php echo $data_pemesanan["status"]; ?></td>
+            <!-- <td><?php echo $data_pemesanan["harga"]; ?></td> -->
             <td><a href="hapus_pemesanan.php?id_member=<?=$data_pemesanan['id_member']?>"
             onclick="return confirm('Apakah anda yakin menghapus data ini?')" class="btn btn-danger"><img class="bi d-block mx-auto mb-1" src="foto/delete.png" width="15" height="15"></a></td>
         </tr>

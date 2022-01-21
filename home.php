@@ -44,7 +44,10 @@
                 include "navbar_side.php";
             ?>
             <br><br><br><br><br><br>
-            <h1 class="text-center">Selamat Datang Di Toko Laundry <?=$_SESSION['nama']?></h1>
+            <div class="container">
+            <div class="card">
+            <div class="card-header" style="background-color: #15317E;">
+            <h1 class="text-center text-white">Selamat Datang Di Toko Laundry <?=$_SESSION['nama']?></h1>
         </div>
     </main>
 
