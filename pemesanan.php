@@ -34,78 +34,90 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-  <!-- <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style> -->
+
 </head>
 <body>
 <main id="main" class="main"> 
 <?php
     include "navbar.php";
     include "navbar_side.php";
+    include "koneksi.php";
     ?>
     <br><br>
     <div class="container">
         <div class="card">
             <div class="card-header" style="background-color: #15317E;">
-    <h1 class= "text-center text-white">Pemesanan</h1>
-        <form action="pelanggan.php" method="POST" class="d-flex">
+    <h1 class= "text-center text-white">Data Transaksi</h1>
+        <form action="pemesanan.php" method="POST" class="d-flex">
         <input class="form-control me-2" type="search" name="cari" placeholder="Search" aria-label="Search">
             <button class="btn text-white" style="background-color: #0041C2;" type="submit">Search</button>
         </form>
             </div>
             <div class="card-body">
-        <table class="table table-striped text-white" style="background-color: #4863A0;">
+        <table class="table text-white" style="background-color: #4863A0;">
     <thead>
         <tr>
-            <th scope="col">Nama Member</th>
-            <!-- <th scope="col">Jenis</th> -->
-            <th scope="col">Proses Pengerjaan</th>
-            <!-- <th scope="col">Harga</th> -->
-            <th scope="col">Hapus</th>
+            <th scope="col">Tanggal Masuk</th>
+            <th scope="col">No</th>
+            <th scope="col">Nama</th>
+            <th scope="col">Laundry</th>
+            <th scope="col">Total</th>
+            <th scope="col">Status Laundry</th>
+            <th scope="col">Status Pembayaran</th>
         </tr>
   </thead>
   <tbody>
-      <?php
-      include "koneksi.php";
-      if (isset($_POST["cari"])) {
-          //jika ada keyword pencarian
-          $cari = $_POST['cari'];
-          $qry_pemesanan = mysqli_query($koneksi, "select * from member where id_member='$cari' or nama like'%$cari%'");
-      }
-      else {
-      $qry_pemesanan=mysqli_query($koneksi,"select * from member join transaksi on member.id_member = transaksi.id_member");
-      }
-
-      while($data_pemesanan=mysqli_fetch_array($qry_pemesanan)){
-      ?>
-        <tr>
-            <td><?php echo $data_pemesanan["nama"]; ?></td>
-            <!-- <td><?php echo $data_pemesanan["jenis"]; ?></td>
-            <td><?php echo $data_pemesanan["qty"]; ?></td> -->
-            <td><?php echo $data_pemesanan["status"]; ?></td>
-            <!-- <td><?php echo $data_pemesanan["harga"]; ?></td> -->
-            <td><a href="hapus_pemesanan.php?id_member=<?=$data_pemesanan['id_member']?>"
-            onclick="return confirm('Apakah anda yakin menghapus data ini?')" class="btn btn-danger"><img class="bi d-block mx-auto mb-1" src="foto/delete.png" width="15" height="15"></a></td>
-        </tr>
-    <?php
-    }
-    ?>
-  </tbody>
+  <?php
+            $qry_transaksi = mysqli_query($koneksi,"SELECT a.*, b.nama, SUM(c.harga) as total FROM transaksi a JOIN member b ON a.id_member=b.id_member JOIN detail_transaksi c ON a.id_transaksi=c.id_transaksi GROUP BY a.id_transaksi");
+            while($data_transaksi=mysqli_fetch_array($qry_transaksi)){
+                $qry_detail_transaksi = mysqli_query($koneksi,"SELECT a.*, b.jenis FROM detail_transaksi a JOIN paket b ON a.id_paket=b.id_paket WHERE a.id_transaksi = '".$data_transaksi['id_transaksi']."'");
+                $detail = '<table border="0" style="border-collapse: collapse;">';
+                while($data_detail_transaksi=mysqli_fetch_array($qry_detail_transaksi)){
+                    $detail .= '
+                        <tr>
+                            <td>'.$data_detail_transaksi['jenis'].'</td>
+                            <td>('.$data_detail_transaksi['qty'].')</td>
+                            <td>'.$data_detail_transaksi['harga'].'</td>
+                        </tr>
+                    ';
+                }
+                $detail .= '</table>'; 
+            ?>    
+                <tr>
+                    <td><?=$data_transaksi['tgl']?></td>
+                    <td><?=$data_transaksi['id_transaksi']?></td>
+                    <td><?=$data_transaksi['nama']?></td>
+                    <td><?=$detail?></td>
+                    <td>Rp <?=$data_transaksi['total']?>,00.</td>  
+                    <td>
+                        <form action="ubah_status" method="get">
+                        <select name="status" class="form-select">
+                            <option value=""selected><?=$data_transaksi['status']?></option>
+                            <option value="baru">Baru</option>
+                            <option value="proses">Proses</option>
+                            <option value="selesai">Selesai</option>
+                            <option value="diambil">Diambil</option>
+                        </select>
+                        <input type="submit" value="OK" name="status" class="btn" style="background-color: #D3DEDC;">
+                        </form>                   
+                    </td>                   
+                    <td>
+                        <form action="ubah_status_bayar" method="get">
+                        <select name="dibayar" class="form-select">
+                            <option value=""selected><?=$data_transaksi['dibayar']?></option>
+                            <option value="dibayar">Dibayar</option>
+                        </select>
+                        <a type="submit" value="Bayar" name="status" class="btn" style="background-color: #D3DEDC;" href="ubah_bayar.php?id_member=<?php echo $data_transaksi['id_member']?>">
+                            Bayar
+                        </a>
+                        </form>                   
+                    </td> 
+                    </tr>                   
+            <?php 
+                } 
+            ?>       
+    </table>
 </table>
-    <td><a href="tambah_pemesanan.php" class="btn text-white" style="background-color:#15317E;">Tambah Pemesanan</a></td>
-    <td><a href="checkout.php" class="btn text-white" style="background-color: #15317E;">Proses</a></td>
     </div>
         </div>
     </div>

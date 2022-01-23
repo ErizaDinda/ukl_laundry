@@ -1,36 +1,37 @@
 <?php
-    if($_POST){
-        $id_member=$_POST['id_member'];
-        $tgl=$_POST['tgl'];
-        $batas_waktu=$_POST['batas_waktu'];
-        $tgl_bayar=$_POST['tgl_bayar'];
-        $status=$_POST['status'];
-        $dibayar=$_POST['dibayar'];
-        $id_user=$_POST['id_user'];
-        if (empty($id_member)) {
-            echo "<script>alert('id pelanggan tidak boleh kosong');location.href='tambah_transaksi.php';</script>";
-        }
+    session_start();
+    include "koneksi.php";
+    $id_member = $_POST["id_member"];
+    $batas_waktu = $_POST["batas_waktu"];
+    // $tgl_bayar = $_POST["tgl_bayar"];
+    $status = ["baru"];
+    $dibayar = $_POST["dibayar"];
+    $id_user = $_SESSION['id_user'];
+    
 
-        elseif (empty($tgl)) {
-            echo "<script>alert('alamat tidak boleh kosong');location.href='tambah_transaksi.php';</script>";
-        }
+    // tabel transaksi
+    $query_transaksi = mysqli_query($koneksi,"insert into transaksi 
+    (id_member,tgl,batas_waktu,status,dibayar,id_user) 
+    values ('".$id_member."','".date('Y-m-d')."','".$batas_waktu."','baru','belum_dibayar','".$id_user."') ");
 
-        elseif (empty($tgl_bayar)) {
-            echo "<script>alert('no telpon tidak boleh kosong');location.href='tambah_transaksi.php';</script>";
-        }
-
-        else {
-            include "koneksi.php";
-            $insert=mysqli_query($koneksi,"insert into transaksi (id_member, tgl, batas_waktu, tgl_bayar, status, dibayar, id_user)
-            value
-            ('".$id_member."','".$tgl."','".$batas_waktu."','".$tgl_bayar."','".$status."','".$dibayar."','".$id_user."')") or die(mysqli_error($koneksi));
-            if ($insert) {
-                echo "<script>alert('Sukses menambahkan transaksi');location.href='transaksi.php';</script>";
-            }
-
-            else {
-                echo "<script>alert('Gagal menambahkan transaksi');location.href='transaksi.php';</script>";
-            }
+    $id_transaksi = $koneksi->insert_id;
+    
+    //tabel detail transaksi
+    for ($i=1; $i <= 7; $i++) { 
+        if (isset($_POST[$i])) {
+            $paket  = $_POST[$i];
+            $qty    = $_POST['qty_'.$i];
+            $harga  = $_POST['harga_'.$i] * $_POST['qty_'.$i];
+            $query_detail_transaksi = mysqli_query($koneksi,"insert into detail_transaksi (id_transaksi,id_paket,qty,harga) values ('".$id_transaksi."','".$paket."','".$qty."','".$harga."')");
         }
     }
+
+    if ($query_detail_transaksi) {
+        echo "<script>alert('berhasil');location.href='pemesanan.php';</script>";
+    }
+    else{
+        echo $query_detail_transaksi;
+    }
+    
+
 ?>

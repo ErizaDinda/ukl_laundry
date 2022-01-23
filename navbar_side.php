@@ -20,6 +20,10 @@
       <i class="bi bi-layout-text-window-reverse"></i>
       <span>Pemesanan</span>
     </a>
+    <a class="nav-link " href="laporan.php">
+      <i class="bi bi-layout-text-window-reverse"></i>
+      <span>Laporan</span>
+    </a>
     <a class="nav-link " href="logout.php">
       <i class="bi bi-person"></i>
       <span>Logout</span>

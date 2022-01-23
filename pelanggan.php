@@ -34,20 +34,7 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
-  <!-- <style>
-      .bd-placeholder-img {
-        font-size: 1.125rem;
-        text-anchor: middle;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        user-select: none;
-      }
-      @media (min-width: 768px) {
-        .bd-placeholder-img-lg {
-          font-size: 3.5rem;
-        }
-      }
-    </style> -->
+ 
 </head>
 <body>
 <?php
@@ -97,7 +84,8 @@
             <td><?php echo $data_member["alamat"]; ?></td>
             <td><?php echo $data_member["jenis_kelamin"]; ?></td>
             <td><?php echo $data_member["tlp"]; ?></td>
-            <td><a href="ubah_pelanggan.php?id_member=<?=$data_member['id_member']?>" class="btn"style="background-color: #D3DEDC;"><img class="bi d-block mx-auto mb-1" src="foto/edit.png" width="15" height="15"></a>
+            <td><a href="tambah_pemesanan.php?id_member=<?=$data_member['id_member']?>" class="btn"style="background-color: #D3DEDC;"><img class="bi d-block mx-auto mb-1" src="foto/click.png" width="15" height="15"></a>
+            <a href="ubah_pelanggan.php?id_member=<?=$data_member['id_member']?>" class="btn"style="background-color: #D3DEDC;"><img class="bi d-block mx-auto mb-1" src="foto/edit.png" width="15" height="15"></a>
             <a href="hapus_pelanggan.php?id_member=<?=$data_member['id_member']?>"
             onclick="return confirm('Apakah anda yakin menghapus data ini?')" class="btn btn-danger"><img class="bi d-block mx-auto mb-1" src="foto/delete.png" width="15" height="15"></a></td>
         </tr>

@@ -46,7 +46,7 @@
         <div class="card">
         <div class="card-body profile-card pt-4 d-flex flex-column align-items-center">
 
-            <img src="assets/img/profile-img.jpg" alt="Profile" class="rounded-circle">
+            <img src="foto/eriza1.jpeg" width="200"  alt="Profile" class="rounded-circle" >
             <br>
             <h1 class="text-center"><?=$_SESSION['nama']?></h1>
             <h3 class="text-center">Id user : <?=$_SESSION['id_user']?></h3>
