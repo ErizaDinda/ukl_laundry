@@ -47,16 +47,14 @@
     <div class="container">
         <div class="card">
             <div class="card-header" style="background-color: #15317E;">
-    <h1 class= "text-center text-white">Data Transaksi</h1>
-        <form action="pemesanan.php" method="POST" class="d-flex">
-        <input class="form-control me-2" type="search" name="cari" placeholder="Search" aria-label="Search">
-            <button class="btn text-white" style="background-color: #0041C2;" type="submit">Search</button>
-        </form>
+    <h1 class= "text-center text-white">Data Pemesanan</h1>
+        
             </div>
             <div class="card-body">
         <table class="table text-white" style="background-color: #4863A0;">
     <thead>
         <tr>
+            <th scope="col">Id Transaksi</th>
             <th scope="col">Tanggal Masuk</th>
             <th scope="col">Nama Pelanggan</th>
             <th scope="col">Jenis Laundry</th>
@@ -83,6 +81,7 @@
                 $detail .= '</table>'; 
             ?>    
                 <tr>
+                    <td><?=$data_transaksi['id_transaksi']?></td>
                     <td><?=$data_transaksi['tgl']?></td>
                     <td><?=$data_transaksi['nama']?></td>
                     <td><?=$detail?></td>
@@ -116,7 +115,9 @@
                 } 
             ?>       
     </table>
+    <a class="btn text-white" style="background-color: #0041C2;" href="#" onclick="window.print();" role = "button">Cetak Laporan</a>
 </table>
+
     </div>
         </div>
     </div>

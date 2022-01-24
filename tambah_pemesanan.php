@@ -42,7 +42,11 @@
         include "navbar_side.php";
     ?>
     <div class="container">
-    <h3 class="text-center">Tambah Pemesanan</h3> 
+        <div class="card">
+        <div class="card-header text-white" style="background-color:  #4863A0;">
+    <h3 class="text-center mt-3">Tambah Pemesanan</h3> 
+    </div>
+    <div class="card-body">
     <form action="proses_tambah_pemesanan.php" method="post">
         <br>
         Pelanggan :
@@ -88,6 +92,8 @@
         </table>
         <input type="submit" name="simpan" value="Tambah Pemesanan" class="w-100 btn btn-lg text-white" style="background-color: #15317E;">
     </form>
+    </div>
+    </div>
     </div>
     </div>
         </main> 

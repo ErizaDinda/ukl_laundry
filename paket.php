@@ -47,7 +47,7 @@
         <div class="card">
             <div class="card-header" style="background-color: #15317E;">
     <h1 class= "text-center text-white">Layanan Paket Laundry</h1>
-        <form action="pelanggan.php" method="POST" class="d-flex">
+        <form action="paket.php" method="POST" class="d-flex">
         <input class="form-control me-2" type="search" name="cari" placeholder="Search" aria-label="Search">
             <button class="btn text-white" style="background-color: #0041C2;" type="submit">Search</button>
         </form>
