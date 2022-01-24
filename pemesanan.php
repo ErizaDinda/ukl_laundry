@@ -58,10 +58,9 @@
     <thead>
         <tr>
             <th scope="col">Tanggal Masuk</th>
-            <th scope="col">No</th>
-            <th scope="col">Nama</th>
-            <th scope="col">Laundry</th>
-            <th scope="col">Total</th>
+            <th scope="col">Nama Pelanggan</th>
+            <th scope="col">Jenis Laundry</th>
+            <th scope="col">Total Harga</th>
             <th scope="col">Status Laundry</th>
             <th scope="col">Status Pembayaran</th>
         </tr>
@@ -85,7 +84,6 @@
             ?>    
                 <tr>
                     <td><?=$data_transaksi['tgl']?></td>
-                    <td><?=$data_transaksi['id_transaksi']?></td>
                     <td><?=$data_transaksi['nama']?></td>
                     <td><?=$detail?></td>
                     <td>Rp <?=$data_transaksi['total']?>,00.</td>  
@@ -97,7 +95,7 @@
                                                     <option value="baru">Baru</option>
                                                     <option value="proses">Proses</option>
                                                     <option value="selesai">Selesai</option>
-                                                    <option value="diambil">DIambil</option>
+                                                    <option value="diambil">Diambil</option>
                                                 </select>
                                                 <input type="submit" value="OK" class="btn text-white" style="background-color: #0041C2;">
                                             </form>                
