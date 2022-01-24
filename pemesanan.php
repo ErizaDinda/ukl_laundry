@@ -90,16 +90,17 @@
                     <td><?=$detail?></td>
                     <td>Rp <?=$data_transaksi['total']?>,00.</td>  
                     <td>
-                        <form action="ubah_status" method="get">
-                        <select name="status" class="form-select">
-                            <option value=""selected><?=$data_transaksi['status']?></option>
-                            <option value="baru">Baru</option>
-                            <option value="proses">Proses</option>
-                            <option value="selesai">Selesai</option>
-                            <option value="diambil">Diambil</option>
-                        </select>
-                        <input type="submit" value="OK" name="status" class="btn" style="background-color: #D3DEDC;">
-                        </form>                   
+                    <form action="ubah_status.php" method="post">
+                                                <input type="hidden" name="id_transaksi" value="<?=$data_transaksi['id_transaksi']?>">
+                                                <select name="status" class="form-select">
+                                                    <option value=""disabled selected><?=$data_transaksi['status']?></option>
+                                                    <option value="baru">Baru</option>
+                                                    <option value="proses">Proses</option>
+                                                    <option value="selesai">Selesai</option>
+                                                    <option value="diambil">DIambil</option>
+                                                </select>
+                                                <input type="submit" value="OK" class="btn text-white" style="background-color: #0041C2;">
+                                            </form>                
                     </td>                   
                     <td>
                         <form action="ubah_status_bayar" method="get">
@@ -107,7 +108,7 @@
                             <option value=""selected><?=$data_transaksi['dibayar']?></option>
                             <option value="dibayar">Dibayar</option>
                         </select>
-                        <a type="submit" value="Bayar" name="status" class="btn" style="background-color: #D3DEDC;" href="ubah_bayar.php?id_member=<?php echo $data_transaksi['id_member']?>">
+                        <a type="submit" value="Bayar" name="status" class="btn text-white" style="background-color: #0041C2;"  href="ubah_bayar.php?id_transaksi=<?php echo $data_transaksi['id_transaksi']?>">
                             Bayar
                         </a>
                         </form>                   
