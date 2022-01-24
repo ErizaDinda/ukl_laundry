@@ -100,14 +100,16 @@
                                             </form>                
                     </td>                   
                     <td>
-                        <form action="ubah_status_bayar" method="get">
+                        <form action="ubah_bayar.php" method="post">
+                        <input type="hidden" name="id_transaksi" value="<?=$data_transaksi['id_transaksi']?>">
                         <select name="dibayar" class="form-select">
                             <option value=""selected><?=$data_transaksi['dibayar']?></option>
                             <option value="dibayar">Dibayar</option>
                         </select>
-                        <a type="submit" value="Bayar" name="status" class="btn text-white" style="background-color: #0041C2;"  href="ubah_bayar.php?id_transaksi=<?php echo $data_transaksi['id_transaksi']?>">
+                        <!-- <button type="submit" value="Bayar" name="status" class="btn text-white" style="background-color: #0041C2;"  href="ubah_bayar.php?id_transaksi=<?php echo $data_transaksi['id_transaksi']?>">
                             Bayar
-                        </a>
+                        </a> -->
+                        <input type="submit" value="Bayar" class="btn text-white" style="background-color: #0041C2;">
                         </form>                   
                     </td> 
                     </tr>                   
